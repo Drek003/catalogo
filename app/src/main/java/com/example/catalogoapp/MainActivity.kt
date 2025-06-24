@@ -11,11 +11,19 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.*
 import org.json.JSONObject
 import java.net.URL
+import android.widget.EditText
+import android.widget.Spinner
+import android.widget.Button
+import android.widget.ArrayAdapter
 
 class MainActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var editTextKeyword: EditText
+    private lateinit var spinnerCategory: Spinner
+    private lateinit var buttonApplyFilter: Button
+    private var allCategories: List<Category> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,6 +31,9 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerViewCategories)
         progressBar = findViewById(R.id.progressBar)
+        editTextKeyword = findViewById(R.id.editTextKeyword)
+        spinnerCategory = findViewById(R.id.spinnerCategory)
+        buttonApplyFilter = findViewById(R.id.buttonApplyFilter)
 
         // Configurar RecyclerView
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -37,6 +48,10 @@ class MainActivity : AppCompatActivity() {
 
         // Cargar datos
         loadCategories()
+
+        buttonApplyFilter.setOnClickListener {
+            aplicarFiltro()
+        }
     }
 
     private fun loadCategories() {
@@ -68,6 +83,13 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     runOnUiThread {
+                        allCategories = categoriesList
+                        // Poblar el Spinner de categorías
+                        val categoryNames = mutableListOf<String>("Todas")
+                        categoryNames.addAll(categoriesList.map { it.name })
+                        val spinnerAdapter = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_item, categoryNames)
+                        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        spinnerCategory.adapter = spinnerAdapter
                         categoryAdapter.updateCategories(categoriesList)
                         progressBar.visibility = View.GONE
                         recyclerView.visibility = View.VISIBLE
@@ -90,6 +112,26 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun aplicarFiltro() {
+        val keyword = editTextKeyword.text.toString().trim().lowercase()
+        val selectedCategory = spinnerCategory.selectedItem?.toString() ?: "Todas"
+
+        // Filtrar categorías según palabra clave y categoría seleccionada
+        var filteredCategories = allCategories
+
+        if (keyword.isNotEmpty()) {
+            filteredCategories = filteredCategories.filter {
+                it.name.lowercase().contains(keyword) || it.description.lowercase().contains(keyword)
+            }
+        }
+
+        if (selectedCategory != "Todas") {
+            filteredCategories = filteredCategories.filter { it.name == selectedCategory }
+        }
+
+        categoryAdapter.updateCategories(filteredCategories)
     }
 }
 

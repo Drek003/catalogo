@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CatalogoApp</string>
+    <string name="filter_keyword_hint">Buscar por palabra clave</string>
+    <string name="filter_category_hint">Seleccionar categoría</string>
+    <string name="filter_min_price_hint">Precio mínimo</string>
+    <string name="filter_max_price_hint">Precio máximo</string>
+    <string name="filter_apply">Aplicar filtro</string>
 </resources>

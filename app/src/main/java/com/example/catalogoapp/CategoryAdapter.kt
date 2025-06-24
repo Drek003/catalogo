@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class CategoryAdapter(
     private val onCategoryClick: (Category) -> Unit
@@ -48,8 +50,18 @@ class CategoryAdapter(
             nameTextView.text = category.name
             descriptionTextView.text = category.description
             
-            // Aquí podrías cargar la imagen usando Glide o Picasso
-            // Por ahora usamos la imagen por defecto
+            // Cargar imagen con Glide
+            if (category.image.isNotEmpty()) {
+                Glide.with(itemView.context)
+                    .load(category.image)
+                    .transition(DrawableTransitionOptions.withCrossFade())
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .error(R.drawable.ic_launcher_foreground)
+                    .into(imageView)
+            } else {
+                // Si no hay imagen, usar placeholder
+                imageView.setImageResource(R.drawable.ic_launcher_foreground)
+            }
         }
     }
 } 

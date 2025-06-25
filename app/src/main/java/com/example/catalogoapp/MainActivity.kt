@@ -87,8 +87,8 @@ class MainActivity : AppCompatActivity() {
                         // Poblar el Spinner de categorías
                         val categoryNames = mutableListOf<String>("Todas")
                         categoryNames.addAll(categoriesList.map { it.name })
-                        val spinnerAdapter = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_item, categoryNames)
-                        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                        val spinnerAdapter = ArrayAdapter(this@MainActivity, R.layout.spinner_item_dark, categoryNames)
+                        spinnerAdapter.setDropDownViewResource(R.layout.spinner_item_dark)
                         spinnerCategory.adapter = spinnerAdapter
                         categoryAdapter.updateCategories(categoriesList)
                         progressBar.visibility = View.GONE

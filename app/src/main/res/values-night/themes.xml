@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Theme.CatalogoApp" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.CatalogoApp" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Colores principales -->
         <item name="colorPrimary">@color/accent</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
@@ -28,4 +27,4 @@
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowDisablePreview">true</item>
     </style>
-</resources>
+</resources> 

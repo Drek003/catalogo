@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
-    app:cardElevation="4dp"
-    app:cardBackgroundColor="#FFFFFF">
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="@color/card_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:layout_height="200dp"
             android:src="@drawable/ic_launcher_foreground"
             android:scaleType="centerCrop"
-            android:background="#E0E0E0"
+            android:background="@color/surface"
             android:contentDescription="Imagen del producto" />
 
         <!-- Información del producto -->
@@ -37,7 +37,7 @@
                 android:text="Nombre del Producto"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="#333333"
+                android:textColor="@color/text_primary"
                 android:maxLines="2"
                 android:ellipsize="end" />
 
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="Descripción del producto"
                 android:textSize="14sp"
-                android:textColor="#666666"
+                android:textColor="@color/text_secondary"
                 android:layout_marginTop="8dp"
                 android:maxLines="3"
                 android:ellipsize="end" />
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:text="Precio: "
                     android:textSize="16sp"
-                    android:textColor="#666666" />
+                    android:textColor="@color/text_secondary" />
 
                 <TextView
                     android:id="@+id/textViewProductPrice"
@@ -75,7 +75,7 @@
                     android:text="$99.99"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="#4CAF50" />
+                    android:textColor="@color/success" />
 
             </LinearLayout>
 
